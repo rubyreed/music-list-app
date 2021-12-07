@@ -1,13 +1,13 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Button, Message } from "semantic-ui-react";
 
 class SongForm extends React.Component{
-  state = {name: "", artist: ""};
+  state = {name: "", artist: "", submitted: false};
 
   handleSubmit=(e) => {
     // e.PreventDefault(); don't need this
     this.props.add(this.state);
-    this.setState({ name: "", artist: ""});
+    this.setState({ name: "", artist: "", submitted: true});
   };
 
   handleChange = (e) => {
@@ -16,8 +16,7 @@ class SongForm extends React.Component{
 
   render() {
     return(
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Field>
+      <Form success onSubmit={this.handleSubmit}>
           <Form.Input
           fluid
           label="Name"
@@ -34,8 +33,12 @@ class SongForm extends React.Component{
           value={this.state.artist}
           onChange={this.handleChange}
           />
-          <Form.Button type="submit">Submit</Form.Button>
-        </Form.Field>
+          {this.state.submitted &&<Message
+          success
+          header='Success!'
+          content='New Song Added'
+          />}
+          <Button type="submit">Submit</Button>
       </Form>
     )
   }

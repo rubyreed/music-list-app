@@ -39,6 +39,7 @@ class App extends Component {
         songs={this.state.songs}
         remove={this.removeSong}
         />
+        <h2>Add New Song</h2>
         <SongForm add={this.addSong}/>
       </Container>
     );
